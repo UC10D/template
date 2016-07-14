@@ -1,0 +1,33 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
+#parse("File Header.java")
+public class QT${QTNumber} extends BaseQT {
+	
+	
+    #if( ${DateName} != "" )
+    private String ${DateName};
+    
+    public QT${QTNumber} (String ${DateName}) {
+      this.${DateName} = ${DateName};
+    }
+    
+    #end
+    
+    @Override
+	public int getRequestQT() {
+		return ${QTNumber};
+	}
+	
+	@Override
+	public HashMap<String, String> getRequestParams() {
+		
+		HashMap<String, String> requestParamsMap = new HashMap<String, String>();
+		requestParamsMap.put("qt", String.valueOf(getRequestQT()));
+
+		 #if( ${DateName} != "" )
+    	requestParamsMap.put("${DateName}", ${DateName});
+    	#end
+		
+		return requestParamsMap;
+	}
+    
+}
